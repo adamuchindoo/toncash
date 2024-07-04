@@ -16,7 +16,7 @@
 </div>
 
     <div class="flex justify-center mt-2" style="margin-top: 10%;">
-      <img src="./img/toncash.png" class="w-[250px]"/>
+      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick"/>
     </div>
 
     <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
@@ -32,8 +32,15 @@
 
 <script>
 export default {
-  
-}
+  methods: {
+    vibrateOnClick() {
+      if ("vibrate" in navigator) {
+        navigator.vibrate(200); // Vibrate for 200ms
+      } else {
+        console.warn("Vibration API not supported.");
+      }
+    }
+}}
 </script>
 
 <style lang="scss" scoped>
