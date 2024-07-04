@@ -16,7 +16,7 @@
 </div>
 
     <div class="flex justify-center mt-2" style="margin-top: 10%;">
-      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick"/>
+      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick" :class="{'effect': effectApplied}"/>
     </div>
 
     <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
@@ -32,17 +32,38 @@
 
 <script>
 export default {
+  data() {
+    return {
+      imageUrl: 'path/to/your/image.jpg',
+      isShaking: false,
+      effectApplied: false
+
+    };
+  },
   methods: {
     vibrateOnClick() {
+      this.effectApplied = !this.effectApplied;
       if ("vibrate" in navigator) {
         navigator.vibrate(200); // Vibrate for 200ms
       } else {
         console.warn("Vibration API not supported.");
       }
-    }
+      setTimeout(() => {
+        this.isShaking = false;
+      }, 500);
+    },
+   
 }}
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
+.effect {
+  animation: shake 0.3s;
+}
 
+@keyframes shake {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
 </style>
