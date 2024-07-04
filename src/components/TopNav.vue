@@ -42,18 +42,21 @@ export default {
   },
   methods: {
     vibrateOnClick() {
-      this.effectApplied = !this.effectApplied;
+      this.effectApplied = true;
       if ("vibrate" in navigator) {
-        navigator.vibrate(200); // Vibrate for 200ms
+        navigator.vibrate(200);
       } else {
         console.warn("Vibration API not supported.");
       }
+
       setTimeout(() => {
-        this.isShaking = false;
+        this.effectApplied = false;
       }, 500);
+    }
+
     },
    
-}}
+}
 </script>
 
 <style  scoped>
