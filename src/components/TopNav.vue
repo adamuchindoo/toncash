@@ -15,7 +15,7 @@
   
 </div>
 
-    <div class="flex justify-center mt-2" style="margin-top: 15%;">
+    <div class="flex justify-center mt-2" style="margin-top: 10%;">
       <img src="./img/toncash.png" class="w-[250px]"/>
     </div>
 
