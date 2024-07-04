@@ -1,8 +1,8 @@
 <template>
       <div class="fixed top-0 left-0 right-0 p-4">
     <div class="bg-[#000] p-4 m-4 border rounded-lg shadow-lg border-none">
-      <div class="text-center text-gray-600 text-[10px]">Your TONCASH Tokens</div>
-      <p class="mb-2 text-white text-center font-bold">2,100,200.00 <span class="text-green-300">TONCASH</span></p>
+      <div class="text-center text-gray-600 text-[13px]">Your TONCASH Tokens</div>
+      <p class="mb-2 text-white text-center font-bold text-[22px]" >2,100,200.00 <span class="text-green-300">TONCASH</span></p>
     </div>
     <div class="text-center text-[15px]">
       Tap, tap, tap! Can't pause, won't nap!<br> Time to refill, but the thrill won't cap!
