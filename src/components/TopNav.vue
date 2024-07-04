@@ -19,7 +19,7 @@
       <img src="./img/toncash.png" class="w-[250px]"/>
     </div>
 
-    <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 15%;">
+    <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
       <div class="col-span-3 text-white mr-1 text-[15px] ">Need more taps? <br> Expand your team!!!</div>
   <div class="p-2 bg-green-500 text-center rounded-md mr-2 text-white  col-span-2">Invite</div>
   <div class="p-2 bg-green-500/20 text-center rounded-md ">
