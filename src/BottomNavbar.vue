@@ -3,7 +3,9 @@
     <div class="h-screen bg-gradient-to-b from-black via-green-800 to-black  w-full">
      
       <div class="text-gray-200">
-        <component :is="activeComp"></component>
+        <component :is="activeComp">
+        
+        </component>
       </div>
 
         <nav class="fixed left-0 w-full " id="nav" style="bottom: 3%;">
@@ -81,7 +83,7 @@
         farm_icon:'',
         teambutton:'',
         team_icon:'',
-         activeComp: ''
+         activeComp: 'tap'
       };
     },
     methods: {

@@ -10,7 +10,7 @@
     <div class="grid grid-cols-2 divide-x mt-4">
   <div class="bg-green-500/20 m-1 rounded-lg p-2 drop-shadow-md text-center">200 taps left</div>
   <div class=" bg-green-500/20 m-1 rounded-lg p-2 drop-shadow-md text-center">
-    <font-awesome-icon :icon="['fas', 'clock']" />
+    <font-awesome-icon :icon="['fas', 'clock']" class="text-green-500"/>
     04:45:43</div>
   
 </div>

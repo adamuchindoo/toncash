@@ -1,8 +1,10 @@
 <template>
- 
+<div>
   
-   <!-- Bottom Navigation Bar -->
-   <bottom-bar/>
+  
+  <!-- Bottom Navigation Bar -->
+  <bottom-bar/>
+</div>
 </template>
 
 <script>
