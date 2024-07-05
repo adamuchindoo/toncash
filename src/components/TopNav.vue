@@ -48,7 +48,7 @@ export default {
       this.effectApplied = true;
       this.showImage(event);
       if ("vibrate" in navigator) {
-        navigator.vibrate(200);
+        navigator.vibrate(100);
       } else {
         console.warn("Vibration API not supported.");
       }
@@ -88,7 +88,7 @@ showImage(event) {
 
 <style  scoped>
 .effect {
-  animation: shake 0.2s;
+  animation: shake 0.1s;
 }
 
 @keyframes shake {
