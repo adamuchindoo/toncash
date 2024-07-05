@@ -88,7 +88,7 @@ showImage(event) {
 
 <style  scoped>
 .effect {
-  animation: shake 0.3s;
+  animation: shake 0.2s;
 }
 
 @keyframes shake {
