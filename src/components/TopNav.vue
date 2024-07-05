@@ -88,12 +88,14 @@ showImage(event) {
 
 <style  scoped>
 .effect {
-  animation: shake 0.1s;
+  animation: shake 0.05s; /* Reduce the duration to 0.05s for a faster shake */
 }
 
 @keyframes shake {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
