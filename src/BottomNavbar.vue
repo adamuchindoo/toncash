@@ -17,8 +17,7 @@
           href="#"
           id="tap_icon"
           class="text-green-800 hover:text-green-500 active:text-gold flex flex-col items-center"
-          @mousedown="toggleClick($event)" 
-          @mouseup="toggleClick($event)">
+          >
           <font-awesome-icon :icon="['fas', 'hand-point-up']" class="h-6 w-6 mb-1" />
           <span class="text-xs">Tap</span>
          
@@ -30,8 +29,7 @@
           href="#" 
           id="task_icon"
           class="text-green-800 hover:text-green-500  active:text-gold flex flex-col items-center"
-          @mousedown="toggleClick($event)" 
-          @mouseup="toggleClick($event)">
+         >
           <font-awesome-icon :icon="['fas', 'list-check']" class="h-6 w-6 mb-1" />
           <span class="text-xs">Task</span>
           
@@ -92,6 +90,7 @@
         const taskbutton = document.getElementById('taskbutton');
         const farmbutton=document.getElementById('farmbutton');
         const teambutton=document.getElementById('teambutton');
+        var activeComp;
       if (boxNumber === 1) {
         tapbutton.classList.add('border-2');
         tap_icon.classList.add('text-green-500');
@@ -102,9 +101,7 @@
         farm_icon.classList.remove('text-green-500');
         teambutton.classList.remove('border-2');
         team_icon.classList.remove('text-green-500');
-
         activeComp = this.activeComp='tap';
-
       }else if (boxNumber === 2){
         taskbutton.classList.add('border-2');
         task_icon.classList.add('text-green-500')
@@ -117,7 +114,7 @@
         team_icon.classList.remove('text-green-500');
 
         activeComp = this.activeComp='task';
-
+        
       }else if (boxNumber === 3){
         farmbutton.classList.add('border-2');
         farm_icon.classList.add('text-green-500')

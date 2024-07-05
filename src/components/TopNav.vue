@@ -15,8 +15,10 @@
   
 </div>
 
-    <div class="flex justify-center mt-2" style="margin-top: 10%;">
+    <div class="flex justify-center mt-2" style="margin-top: 10%;" >
+      
       <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick" :class="{'effect': effectApplied}"/>
+
     </div>
 
     <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
@@ -52,7 +54,8 @@ export default {
       setTimeout(() => {
         this.effectApplied = false;
       }, 500);
-    }
+    },
+
 
     },
    
@@ -69,4 +72,6 @@ export default {
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+
+
 </style>
