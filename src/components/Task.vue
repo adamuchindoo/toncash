@@ -1,15 +1,10 @@
 <template>
-    <div>
-      <div style="height: 200px;"></div>
-      <div id="app" @click="showImage($event)">
-        <button @click="toggleAnimation" class="text-white">
-          <i class="fas fa-egg"></i> <span id='toggleText'>{{ xx }}</span>
-        </button>
-        <div v-for="(image, index) in images" :key="index" class="animated" :style="{ top: image.posY + 'px', left: image.posX + 'px' }">
-          <img :src="image.src" class="anim" v-if="image.isAnimating">
-        </div>
+  
+      <div class="flex justify-center">
+       task section
       </div>
-    </div>
+  
+    
   </template>
   
   <script>
@@ -26,21 +21,18 @@
         const posY = event.pageY;
   
         // Add new image to images array
-        this.images.push({
+        const newImage = {
           src: "https://i.ibb.co/BsDMxXf/cash-icon.png", // Replace with actual image path
           posX: posX,
           posY: posY,
           isAnimating: true
-        });
+        };
+        this.images.push(newImage);
   
-        // Reset animation after a short delay
+        // Reset animation for this specific image after a short delay
         setTimeout(() => {
-          this.images.forEach((image, index) => {
-            if (index === this.images.length - 1) {
-              image.isAnimating = false; // Only reset the last added image
-            }
-          });
-        }, 1500); // Adjust this timeout to match your animation duration
+          newImage.isAnimating = false;
+        }, 1000); // Adjust this timeout to match your animation duration
       },
       toggleAnimation() {
         // Method for toggling animation or other functionality if needed
@@ -74,7 +66,7 @@
       transform: translateY(0);
     }
     100% {
-      transform: translateY(-200px);
+      transform: translateY(-100px);
       opacity: 0; /* Fade out at the end of animation */
     }
   }

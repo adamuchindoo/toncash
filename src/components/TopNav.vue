@@ -15,10 +15,12 @@
   
 </div>
 
-    <div class="flex justify-center mt-2" style="margin-top: 10%;" >
+    <div @click="showImage($event)" class="flex justify-center mt-2 " style="margin-top: 10%;" >
       
       <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick" :class="{'effect': effectApplied}"/>
-
+      <div v-for="(image, index) in images" :key="index" class="animated " :style="{ top: image.posY + 'px', left: image.posX + 'px' }">
+        <img :src="image.src" class="anim" v-if="image.isAnimating">
+      </div>
     </div>
 
     <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
@@ -36,10 +38,9 @@
 export default {
   data() {
     return {
-      imageUrl: 'path/to/your/image.jpg',
       isShaking: false,
-      effectApplied: false
-
+      effectApplied: false,
+      images: []
     };
   },
   methods: {
@@ -55,8 +56,30 @@ export default {
         this.effectApplied = false;
       }, 500);
     },
-
-
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+showImage(event) {
+        const posX = event.pageX;
+        const posY = event.pageY;
+  
+        // Add new image to images array
+        const newImage = {
+          src: "https://i.ibb.co/BsDMxXf/cash-icon.png", // Replace with actual image path
+          posX: posX-40,
+          posY: posY-60,
+          isAnimating: true
+        };
+        this.images.push(newImage);
+  
+        // Reset animation for this specific image after a short delay
+        setTimeout(() => {
+          newImage.isAnimating = false;
+        }, 1000); // Adjust this timeout to match your animation duration
+      },
+      toggleAnimation() {
+        // Method for toggling animation or other functionality if needed
+        // Example: toggling xx variable
+        this.xx = this.xx === "a2c test" ? "another value" : "a2c test";
+      }
     },
    
 }
@@ -73,5 +96,31 @@ export default {
   100% { transform: scale(1); }
 }
 
+.flier {
+    /* Ensure the container has sufficient space to show the image */
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .anim {
+    /* Add any styles necessary for your image */
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+  }
+  
+  .animated {
+    position: absolute;
+    animation: moveUp 1s ease forwards;
+  }
+  
+  @keyframes moveUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-200px);
+      opacity: 0; /* Fade out at the end of animation */
+    }
+  }
 
 </style>
