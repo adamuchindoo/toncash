@@ -48,7 +48,7 @@ export default {
       this.effectApplied = true;
       this.showImage(event);
       if ("vibrate" in navigator) {
-        navigator.vibrate(100);
+        navigator.vibrate([50, 25, 50, 25, 50]);
       } else {
         console.warn("Vibration API not supported.");
       }
