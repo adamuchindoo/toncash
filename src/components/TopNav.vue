@@ -15,9 +15,9 @@
   
 </div>
 
-    <div @click="showImage($event)" class="flex justify-center mt-2 " style="margin-top: 10%;" >
+    <div class="flex justify-center mt-2 " style="margin-top: 10%;" >
       
-      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick" :class="{'effect': effectApplied}"/>
+      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick($event)" :class="{'effect': effectApplied}"/>
       <div v-for="(image, index) in images" :key="index" class="animated " :style="{ top: image.posY + 'px', left: image.posX + 'px' }">
         <img :src="image.src" class="anim" v-if="image.isAnimating">
       </div>
@@ -44,8 +44,9 @@ export default {
     };
   },
   methods: {
-    vibrateOnClick() {
+    vibrateOnClick(event) {
       this.effectApplied = true;
+      this.showImage(event);
       if ("vibrate" in navigator) {
         navigator.vibrate(200);
       } else {
