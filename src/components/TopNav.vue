@@ -40,7 +40,7 @@
       <div class="col-span-4 text-white mr-1 text-[15px] pt-2 font-bold">{{numberOfClaim}} <span class="text-green-300">TONCASH</span></div>
 
 
-   <div v-if="numberOfClaim>0" @click="letCelebrate" class="p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
+   <div v-if="numberOfClaim>0" @click="letCelebrate" class="p-2 bg-gradient-to-r from-green-500 from-10% via-black/10 via-30% to-emerald-600 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
     Claim
   </div>
   <div v-if="numberOfClaim<1" class="p-2 bg-gradient-to-r from-gray-500 from-10% via-gray-500 via-30% to-gray-500 to-90% text-center rounded-md col-span-2 text-gray-300 cursor-pointer">
@@ -147,7 +147,7 @@ showImage(event) {
         setTimeout(() => {
           this.confettis = [];
           this.showConfetti = false;
-        }, 3000); // Clear confettis after 3 seconds
+        }, 3000);
       },
       getRandomColor() {
         const colors = ['#f44336', '#2196f3', '#4caf50', '#ffeb3b', '#9c27b0'];
