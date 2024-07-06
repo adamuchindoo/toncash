@@ -58,7 +58,7 @@
       <span class="text-green-300 text-[20px] pt-2 font-bold"> TONCASH</span><br>
       <span class="text-gray-400 text-[14px]">Keep shining bright, persevere through challenges, and always discover the silver lining in every cloud. <br> Get more </span>
       <br>
-      <div @click="getMore" class="mt-2 p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
+      <div @click="getMore" class="mt-2 p-2 bg-gradient-to-r from-green-600 from-10% via-green-300 via-30% to-emerald-600 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
     More!!!
   </div>
     </div>
