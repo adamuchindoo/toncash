@@ -1,4 +1,7 @@
 <template>
+        <div v-if="showConfetti" class="confetti-container">
+        <div v-for="(confetti, index) in confettis" :key="index" class="confetti" :style="confetti.style"></div>
+      </div>
       <div class="fixed top-0 left-0 right-0 p-4">
     <div class="bg-[#000] p-4 m-4 border rounded-lg shadow-lg border-none">
       <div class="text-center text-gray-600 text-[13px]">Your TONCASH Tokens</div>
@@ -49,10 +52,10 @@
   </div>
   <div v-if="celebrate==true" class="bg-black/50 fixed top-0 left-0 h-screen w-screen content-center p-5">
     <div class="bg-black p-4 rounded-md text-center drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]" >
-      <font-awesome-icon :icon="['fas', 'champagne-glasses']" class="size-10" />
+      <font-awesome-icon :icon="['fas', 'champagne-glasses']" class="size-10 text-green-500" />
       <p>Woo hoo! </p>
-      <span class="text-[20px] pt-2 font-bold">+200 </span>
-      <span class="text-green-300 text-[20px] pt-2 font-bold">TONCASH</span><br>
+      <span class="text-[20px] pt-2 font-bold">+{{ _numberOfClaim }} </span>
+      <span class="text-green-300 text-[20px] pt-2 font-bold"> TONCASH</span><br>
       <span class="text-gray-400 text-[14px]">Keep shining bright, persevere through challenges, and always discover the silver lining in every cloud. <br> Get more </span>
       <br>
       <div @click="getMore" class="mt-2 p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
@@ -63,9 +66,8 @@
 </template>
 
 <script>
-import Celebrate from './Celebrate.vue';
+
 export default {
-  components: { Celebrate },
   data() {
     return {
       isShaking: false,
@@ -74,13 +76,17 @@ export default {
       numberOfTaps:50,
       numberOfClaim:0,
       celebrate:false,
-     
+      showConfetti: false,
+      confettis: [],
+      _numberOfClaim:0
     };
   },
   methods: {
-    letCelebrate(){
+    letCelebrate(event){
       this.celebrate=true;
+      this._numberOfClaim=this.numberOfClaim;
       this.numberOfClaim=0;
+      this.explodeConfetti()
     },
     getMore(){
       this.celebrate=false;
@@ -124,7 +130,29 @@ showImage(event) {
           this.numberOfClaim+=1;
         }
         
-      }
+      },
+      //>>>>>>>>>>>>>>>>>>>>>>>>>
+      explodeConfetti() {
+        this.showConfetti = true;
+        for (let i = 0; i < 100; i++) {
+          this.confettis.push({
+            style: {
+              left: `${Math.random() * 100}vw`,
+              top: `${Math.random() * 100}vh`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+              backgroundColor: this.getRandomColor(),
+            },
+          });
+        }
+        setTimeout(() => {
+          this.confettis = [];
+          this.showConfetti = false;
+        }, 3000); // Clear confettis after 3 seconds
+      },
+      getRandomColor() {
+        const colors = ['#f44336', '#2196f3', '#4caf50', '#ffeb3b', '#9c27b0'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      },
     },
    
 }
@@ -164,6 +192,36 @@ showImage(event) {
     }
     100% {
       transform: translateY(-200px);
+      opacity: 0;
+    }
+  }
+
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: confetti-fall 3s ease-out infinite;
+  }
+  
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-100vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(1080deg);
       opacity: 0;
     }
   }
