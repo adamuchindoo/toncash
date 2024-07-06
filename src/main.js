@@ -12,6 +12,7 @@ import Background from './components/Background.vue';
 import Tap from './components/Tap.vue';
 import Task from './components/Task.vue';
 import CashSpray from './components/CashSpray.vue';
+import Celebrate from './components/Celebrate.vue';
 // Add the icons to the library
 library.add(fas, fab);
 
@@ -25,4 +26,5 @@ app.component('background', Background);
 app.component('tap', Tap);
 app.component('task',Task);
 app.component('CashSpray',CashSpray);
+app.component('celebrate',Celebrate);
 app.mount('#app');

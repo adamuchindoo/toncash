@@ -1,73 +1,76 @@
 <template>
-  
-      <div class="flex justify-center">
-       task section
+    <div>
+      <button @click="explodeConfetti">Explode Confetti</button>
+      <div v-if="showConfetti" class="confetti-container">
+        <div v-for="(confetti, index) in confettis" :key="index" class="confetti" :style="confetti.style"></div>
       </div>
-  
-    
+    </div>
+    <celebrate/>
+
   </template>
   
   <script>
   export default {
     data() {
       return {
-        xx: "a2c test",
-        images: []
+        showConfetti: false,
+        confettis: [],
       };
     },
     methods: {
-      showImage(event) {
-        const posX = event.pageX;
-        const posY = event.pageY;
-  
-        // Add new image to images array
-        const newImage = {
-          src: "https://i.ibb.co/BsDMxXf/cash-icon.png", // Replace with actual image path
-          posX: posX,
-          posY: posY,
-          isAnimating: true
-        };
-        this.images.push(newImage);
-  
-        // Reset animation for this specific image after a short delay
+      explodeConfetti() {
+        this.showConfetti = true;
+        for (let i = 0; i < 100; i++) {
+          this.confettis.push({
+            style: {
+              left: `${Math.random() * 100}vw`,
+              top: `${Math.random() * 100}vh`,
+              transform: `rotate(${Math.random() * 360}deg)`,
+              backgroundColor: this.getRandomColor(),
+            },
+          });
+        }
         setTimeout(() => {
-          newImage.isAnimating = false;
-        }, 1000); // Adjust this timeout to match your animation duration
+          this.confettis = [];
+          this.showConfetti = false;
+        }, 3000); // Clear confettis after 3 seconds
       },
-      toggleAnimation() {
-        // Method for toggling animation or other functionality if needed
-        // Example: toggling xx variable
-        this.xx = this.xx === "a2c test" ? "another value" : "a2c test";
-      }
-    }
+      getRandomColor() {
+        const colors = ['#f44336', '#2196f3', '#4caf50', '#ffeb3b', '#9c27b0'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      },
+    },
   };
   </script>
   
   <style scoped>
-  .flier {
-    /* Ensure the container has sufficient space to show the image */
-    height: 200px;
-    overflow: hidden;
+  .confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    pointer-events: none;
   }
   
-  .anim {
-    /* Add any styles necessary for your image */
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-  }
-  
-  .animated {
+  .confetti {
     position: absolute;
-    animation: moveUp 1s ease forwards;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: confetti-fall 3s ease-out infinite;
   }
   
-  @keyframes moveUp {
+  @keyframes confetti-fall {
     0% {
-      transform: translateY(0);
+      transform: translateY(-100vh) rotate(0deg);
+      opacity: 1;
     }
     100% {
-      transform: translateY(-100px);
-      opacity: 0; /* Fade out at the end of animation */
+      transform: translateY(100vh) rotate(1080deg);
+      opacity: 0;
     }
   }
   </style>

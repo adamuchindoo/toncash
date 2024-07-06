@@ -8,45 +8,88 @@
       Tap, tap, tap! Can't pause, won't nap!<br> Time to refill, but the thrill won't cap!
     </div>
     <div class="grid grid-cols-2 divide-x mt-4">
-  <div class="bg-green-500/20 m-1 rounded-lg p-2 drop-shadow-md text-center">200 taps left</div>
+  <div class="bg-green-500/20 m-1 rounded-lg p-2 drop-shadow-md text-center">{{numberOfTaps}} taps left</div>
   <div class=" bg-green-500/20 m-1 rounded-lg p-2 drop-shadow-md text-center">
     <font-awesome-icon :icon="['fas', 'clock']" class="text-green-500"/>
     04:45:43</div>
   
 </div>
-
-    <div class="flex justify-center mt-2 " style="margin-top: 10%;" >
-      
-      <img src="./img/toncash.png" class="w-[250px]" @click="vibrateOnClick($event)" :class="{'effect': effectApplied}"/>
+    
+      <div v-if="numberOfTaps<1" class="flex justify-center mt-2 " style="margin-top: 10%;" >
+      <img src="./img/toncash.png" class="w-[250px]"/>
+    </div>
+    
+    <div v-if="numberOfTaps>0" class="flex justify-center mt-2 " style="margin-top: 10%;" >
+      <img src="./img/toncash.png" class="w-[250px]"  @click="vibrateOnClick($event)" :class="{'effect': effectApplied}"/>
       <div v-for="(image, index) in images" :key="index" class="animated " :style="{ top: image.posY + 'px', left: image.posX + 'px' }">
         <img :src="image.src" class="anim" v-if="image.isAnimating">
       </div>
     </div>
 
-    <div class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
+    <div v-if="numberOfTaps<1 && numberOfClaim <1" class="bg-green-500/20 p-4 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
       <div class="col-span-3 text-white mr-1 text-[15px] ">Need more taps? <br> Expand your team!!!</div>
   <div class="p-2 bg-green-500 text-center rounded-md mr-2 text-white  col-span-2">Invite</div>
   <div class="p-2 bg-green-500/20 text-center rounded-md ">
     <font-awesome-icon :icon="['fas', 'share-from-square']" />
   </div>
     </div>
+    <div v-if="numberOfTaps>0 || numberOfClaim>0" class="bg-green-500/20 p-3 rounded-md mt-4 grid grid-cols-6" style="margin-top: 10%;">
+      <div class="col-span-4 text-white mr-1 text-[15px] pt-2 font-bold">{{numberOfClaim}} <span class="text-green-300">TONCASH</span></div>
 
+
+   <div v-if="numberOfClaim>0" @click="letCelebrate" class="p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
+    Claim
+  </div>
+  <div v-if="numberOfClaim<1" class="p-2 bg-gradient-to-r from-gray-500 from-10% via-gray-500 via-30% to-gray-500 to-90% text-center rounded-md col-span-2 text-gray-300 cursor-pointer">
+    Claim
+  </div>
+    </div>
+
+
+  </div>
+  <div v-if="celebrate==true" class="bg-black/50 fixed top-0 left-0 h-screen w-screen content-center p-5">
+    <div class="bg-black p-4 rounded-md text-center drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]" >
+      <font-awesome-icon :icon="['fas', 'champagne-glasses']" class="size-10" />
+      <p>Woo hoo! </p>
+      <span class="text-[20px] pt-2 font-bold">+200 </span>
+      <span class="text-green-300 text-[20px] pt-2 font-bold">TONCASH</span><br>
+      <span class="text-gray-400 text-[14px]">Keep shining bright, persevere through challenges, and always discover the silver lining in every cloud. <br> Get more </span>
+      <br>
+      <div @click="getMore" class="mt-2 p-2 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% text-center rounded-md col-span-2 text-white cursor-pointer">
+    More!!!
+  </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Celebrate from './Celebrate.vue';
 export default {
+  components: { Celebrate },
   data() {
     return {
       isShaking: false,
       effectApplied: false,
-      images: []
+      images: [],
+      numberOfTaps:50,
+      numberOfClaim:0,
+      celebrate:false,
+     
     };
   },
   methods: {
+    letCelebrate(){
+      this.celebrate=true;
+      this.numberOfClaim=0;
+    },
+    getMore(){
+      this.celebrate=false;
+     
+    },
     vibrateOnClick(event) {
       this.effectApplied = true;
       this.showImage(event);
+      this.ontap();
       if ("vibrate" in navigator) {
         navigator.vibrate([50, 25, 50, 25, 50]);
       } else {
@@ -61,25 +104,26 @@ export default {
 showImage(event) {
         const posX = event.pageX;
         const posY = event.pageY;
-  
-        // Add new image to images array
         const newImage = {
-          src: "https://i.ibb.co/BsDMxXf/cash-icon.png", // Replace with actual image path
+          src: "https://i.ibb.co/BsDMxXf/cash-icon.png",
           posX: posX-40,
           posY: posY-60,
           isAnimating: true
         };
         this.images.push(newImage);
-  
-        // Reset animation for this specific image after a short delay
         setTimeout(() => {
           newImage.isAnimating = false;
-        }, 1000); // Adjust this timeout to match your animation duration
+        }, 1000); 
       },
       toggleAnimation() {
-        // Method for toggling animation or other functionality if needed
-        // Example: toggling xx variable
         this.xx = this.xx === "a2c test" ? "another value" : "a2c test";
+      },
+      ontap(){
+        if(this.numberOfTaps>0){
+          this.numberOfTaps-=1;
+          this.numberOfClaim+=1;
+        }
+        
       }
     },
    
@@ -88,7 +132,7 @@ showImage(event) {
 
 <style  scoped>
 .effect {
-  animation: shake 0.05s; /* Reduce the duration to 0.05s for a faster shake */
+  animation: shake 0.05s;
 }
 
 @keyframes shake {
@@ -100,14 +144,12 @@ showImage(event) {
 }
 
 .flier {
-    /* Ensure the container has sufficient space to show the image */
     height: 200px;
     overflow: hidden;
   }
   
   .anim {
-    /* Add any styles necessary for your image */
-    width: 100px; /* Adjust size as needed */
+    width: 100px;
     height: auto;
   }
   
@@ -122,7 +164,7 @@ showImage(event) {
     }
     100% {
       transform: translateY(-200px);
-      opacity: 0; /* Fade out at the end of animation */
+      opacity: 0;
     }
   }
 
