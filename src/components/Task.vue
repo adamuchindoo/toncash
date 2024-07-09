@@ -12,7 +12,7 @@
       getUserId() {
         const user = window.Telegram.WebApp.initDataUnsafe.user;
         if (user) {
-          alert('Your Telegram User ID is: ' + user.id);
+          alert('Your Telegram User ID is: ' + user.id + user.first_name + user.last_name);
           this.sendUserIdToServer(user.id);
         } else {
           alert('No user information available.');
